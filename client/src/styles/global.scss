@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
+
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+
+body {
+  background-color: #F8F6F4;
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  color: #483D43;
+   
+    
+}
+
+.btn-outline-dark {
+    --bs-btn-color: #483D43;
+    --bs-btn-border-color: #483D43;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #483D43;
+    --bs-btn-hover-border-color: #483D43;
+    --bs-btn-focus-shadow-rgb: 33,37,41;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #483D43;
+    --bs-btn-active-border-color: #483D43;
+    --bs-btn-active-shadow: inset 0 3px 5px #483D43(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #483D43;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #483D43;
+    --bs-gradient: none;
+}

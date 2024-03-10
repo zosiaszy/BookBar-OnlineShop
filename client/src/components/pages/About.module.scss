@@ -1,0 +1,35 @@
+
+.about {
+    
+    border-width: 1px;
+    padding: 50px;
+   box-sizing: border-box;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+    color: #483D43;
+    font-size: 20px;
+
+    h1 {
+        
+        font-size: 60px;
+       
+    }
+
+    h2 {
+        color: #A87E60;
+        font-size: 40px;
+    }
+
+    p {
+        max-width: 1000px;
+        text-align: justify;
+        margin-top: 10px;
+       position: relative;
+       margin-left: 135px;
+    
+    }
+}

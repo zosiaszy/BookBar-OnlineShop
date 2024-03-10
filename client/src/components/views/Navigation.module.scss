@@ -1,0 +1,16 @@
+.navbarBrand {
+    font-style: italic;
+    padding-top: var(--bs-navbar-brand-padding-y);
+    padding-bottom: var(--bs-navbar-brand-padding-y);
+    margin-right: var(--bs-navbar-brand-margin-end);
+    font-size: 40px;
+    color: #F3BEBA;
+    text-decoration: none;
+    white-space: nowrap;
+    font-weight: bolder;
+}
+
+.navbarBrand:hover {
+    color: #D88F89;
+}
+
