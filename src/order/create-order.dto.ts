@@ -1,23 +1,18 @@
 import {
   IsString,
   IsEmail,
-  IsArray,
   IsNotEmpty,
   IsNumber,
-  IsUUID,
   Min,
+  IsUUID,
+  IsArray,
 } from 'class-validator';
 
 class CartProductDTO {
-
   @IsNotEmpty()
   @IsUUID()
   productId: string;
 
-  @IsNotEmpty()
-  @IsUUID()
-  orderId: string;
-  
   @IsNotEmpty()
   @IsNumber()
   count: number;
@@ -28,16 +23,16 @@ class CartProductDTO {
 
   @IsString()
   comment: string;
+
+  @IsNotEmpty()
+  @IsUUID()
+  orderId: string;
 }
 
-class OrderDTO {
+export class OrderDTO {
   @IsNotEmpty()
   @IsString()
   name: string;
-
-  @IsNotEmpty()
-  @IsString()
-  userId: string;
 
   @IsNotEmpty()
   @IsEmail()
@@ -57,8 +52,10 @@ class OrderDTO {
   totalPrice: number;
 
   @IsNotEmpty()
+  @IsString()
+  userId: string;
+
+  @IsNotEmpty()
   @IsArray()
   cartProducts: CartProductDTO[];
 }
-
-export { OrderDTO };

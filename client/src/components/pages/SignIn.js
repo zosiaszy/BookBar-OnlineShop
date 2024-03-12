@@ -12,14 +12,15 @@ const SignIn = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [userId, setUserId] = useState('');
   const [status, setStatus] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const userData = {
       email,
       password,
+      
     };
     const options = {
       method: 'POST',
@@ -29,24 +30,25 @@ const SignIn = () => {
       body: JSON.stringify(userData),
     };
     setStatus('loading');
-    fetch(`${AUTH_URL}/login`, options)
-      .then((res) => {
-        if (res.status === 201) {
-
-          setStatus('success');
-          dispatch(logIn({ email }));
-          setTimeout(() => {
-            navigate('/');
-          }, 3000);
-        } else if (res.status === 400) {
-          setStatus('clientError');
-        } else {
-          setStatus('serverError');
-        }
-      })
-      .catch((err) => {
+    try {
+      const response = await fetch(`${AUTH_URL}/login`, options);
+      if (response.ok) {
+        const userData = await response.json();
+        dispatch(logIn({ email }));
+      
+        localStorage.setItem('userId', userData.userId); // Zapisz userId w localStorage
+        setStatus('success');
+        setTimeout(() => {
+          navigate('/');
+        }, 3000);
+      } else if (response.status === 400) {
+        setStatus('clientError');
+      } else {
         setStatus('serverError');
-      });
+      }
+    } catch (error) {
+      setStatus('serverError');
+    }
   };
 
   return (

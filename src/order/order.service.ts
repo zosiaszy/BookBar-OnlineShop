@@ -30,11 +30,13 @@ export class OrderService {
   public async createOrder(
     orderData: Omit<Order, 'id' | 'dateOfCreation'>,
     cartProducts: Omit<CartProduct, 'id'>[],
+    userId: string,
   ): Promise<Order> {
     try {
       return await this.prismaService.order.create({
         data: {
           ...orderData,
+          userId: userId,
           cartProducts: {
             create: cartProducts.map((cartProduct) => ({
               ...cartProduct,

@@ -10,13 +10,14 @@ import { AppService } from './app.service';
 import { ProductModule } from './product/product.module';
 import { UsersModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { OrderModule } from './order/order.module';
 
 import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
-import { OrderModule } from './order/order.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -24,13 +25,14 @@ import { OrderModule } from './order/order.module';
       rootPath: join(__dirname, '../../', 'client', 'build'),
     }),
     ProductModule,
+    PrismaModule,
     UsersModule,
     AuthModule,
-    OrderModule,
     ConfigModule.forRoot({
       load: [configuration],
       isGlobal: true,
     }),
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],

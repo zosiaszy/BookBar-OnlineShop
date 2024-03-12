@@ -31,15 +31,13 @@ export class ProductController {
   }
 
   @Post('/')
-  @UseGuards(AdminAuthGuard)
-  @UseGuards(JwtAuthGuard)
+  
   async createProduct(@Body() productData: CreateProductDTO) {
     return this.productService.createProduct(productData);
   }
 
   @Put('/:id')
-  @UseGuards(AdminAuthGuard)
-  @UseGuards(JwtAuthGuard)
+  
   async updateProduct(
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() productData: UpdateProductDTO,

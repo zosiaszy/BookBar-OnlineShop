@@ -1,27 +1,19 @@
-import { AuthService } from '../auth/auth.service';
-import { RegisterDTO } from '../auth/register.dto';
-import {
-  Controller,
-  Post,
-  Body,
-  Request,
-  Response,
-  Delete,
-} from '@nestjs/common';
-import { UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Body, UseGuards, Request, Response } from '@nestjs/common';
+import { AuthService } from './auth.service';
+import { RegisterDTO } from './register.dto';
 import { LocalAuthGuard } from './local-auth.guard';
 import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
-  @Post('register')
-  async register(@Body() authData: RegisterDTO) {
-    return this.authService.register(authData);
+  @Post('/register')
+  register(@Body() registerData: RegisterDTO) {
+    return this.authService.register(registerData);
   }
 
-  @UseGuards(LocalAuthGuard)
+ 
   @Post('login')
   async login(@Request() req, @Response() res) {
     const tokens = await this.authService.createSession(req.user);
@@ -29,6 +21,12 @@ export class AuthController {
     res.send({
       message: 'success',
     });
+  }
+
+  @Get('user') 
+  @UseGuards(JwtAuthGuard)
+  getUser(@Request() req) {
+    return req.user;
   }
 
   @UseGuards(JwtAuthGuard)

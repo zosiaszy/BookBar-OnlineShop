@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container } from 'react-bootstrap';
+import { Button, Container, Card } from 'react-bootstrap';
 import CartItem from '../pages/CartItem';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -46,33 +46,35 @@ const CartPage = () => {
 
   if (cart.products.length === 0) {
     return (
-      <Container>
+      <Container className="d-flex flex-column align-items-center justify-content-center vh-100">
         <h1>Cart is empty</h1>
-        <Link to="/">
+        <Link to="/" className="mt-3">
           <Button variant="outline-dark">Shop Now</Button>
         </Link>
       </Container>
     );
   }
 
-
   const handleSubmit = () => {
     navigate('/order-summary');
   };
 
   return (
-    <Container>
-      <h1>Cart</h1>
+    <Container className="d-flex flex-column align-items-center">
+      <h1 className="my-4">Cart</h1>
       {cart.products.map((product) => (
-        <CartItem
-          key={product.id}
-          product={product}
-          updateCart={updateCart}
-          removeProduct={removeProduct}
-        />
+        <Card key={product.id} className="w-75 mb-3">
+          <Card.Body>
+            <CartItem
+              product={product}
+              updateCart={updateCart}
+              removeProduct={removeProduct}
+            />
+          </Card.Body>
+        </Card>
       ))}
-      <h5 className="my-5">Total Price: ${totalPrice}</h5>
-      <Button variant="outline-dark" onClick={handleSubmit}>
+      <h5 className="my-5">Total Price: <strong>${totalPrice}</strong></h5>
+      <Button variant="outline-dark" size="lg" onClick={handleSubmit}>
         Order Summary
       </Button>
     </Container>

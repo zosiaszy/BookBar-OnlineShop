@@ -7,8 +7,7 @@ import { Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { IMAGES_URL } from '../../config';
-import {Card} from 'react-bootstrap';
-
+import { Card } from 'react-bootstrap';
 import React from 'react';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 
@@ -49,6 +48,7 @@ const Product = () => {
       setProductCount(productCount - 1);
     }
   };
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -74,35 +74,37 @@ const Product = () => {
       <Container>
         <Row className="justify-content-center">
           <Col md={6}>
-            <div>
-              <h2 className="text-center py-4">Product details</h2>
-              <Card.Img
-               
-                src={`${IMAGES_URL}/${product.image}`}
-                alt={product.title}
-              />
-              <div>
-                <div>
-                  <h3>{product.title}</h3>
-                  <h3>{product.price} $ </h3>
-                  <h4> {product.description}</h4>
-                  
+            <div className="text-center">
+              <h2 className="py-4 font-weight-bold">PRODUCT DETAILS</h2>
+              <Card className="my-2">
+                <Card.Img
+                  src={`${IMAGES_URL}/${product.image}`}
+                  alt={product.title}
+                  style={{ width: '70%', margin: '20px auto 10px auto' }}
+                />
+                <Card.Body className="d-flex flex-column align-items-center">
+                  <Card.Title style={{ fontSize: '1.5rem' }}>{product.title}</Card.Title>
+                  <Card.Text style={{ textAlign: 'justify' }}>
+                    {product.description}
+                  </Card.Text>
                   <div className="d-flex align-items-center justify-content-center">
                     <Button variant="secondary" onClick={decrementProductCount}>
-                      <FontAwesomeIcon icon={faMinus} />
+                      <FontAwesomeIcon icon={faMinus} size="lg" />
                     </Button>
-                    <p className="mx-3">{productCount}</p>
+                    <p className="mx-3" style={{ fontSize: '1.5rem' }}>
+                      {productCount}
+                    </p>
                     <Button variant="secondary" onClick={incrementProductCount}>
-                      <FontAwesomeIcon icon={faPlus} />
+                      <FontAwesomeIcon icon={faPlus} size="lg" />
                     </Button>
                   </div>
                   <div className="text-center mt-4">
-                    <Button variant="secondary" onClick={handleAddToCart}>
+                    <Button variant="secondary" size="lg" onClick={handleAddToCart}>
                       Add to Cart
                     </Button>
                   </div>
-                </div>
-              </div>
+                </Card.Body>
+              </Card>
             </div>
           </Col>
         </Row>

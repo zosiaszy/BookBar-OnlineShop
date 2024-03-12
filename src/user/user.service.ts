@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  ConflictException,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
 import { User, Password } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 
@@ -11,7 +7,8 @@ export class UsersService {
   constructor(private prismaService: PrismaService) {}
 
   public async getAll(): Promise<User[]> {
-    return this.prismaService.user.findMany({});
+    return this.prismaService.user.findMany({
+    });
   }
 
   public async getById(id: User['id']): Promise<User | null> {

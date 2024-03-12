@@ -40,7 +40,7 @@ const dispatch = useDispatch();
         
            <Route path="/" element={<Home />} />
   
-        <Route path="/about-us" element={<About/>} />
+        <Route path="/about" element={<About/>} />
 
         <Route path="/cart" element={<CartPage />} />
 

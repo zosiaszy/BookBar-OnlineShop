@@ -1,6 +1,6 @@
 //selectors
 
-import { API_URL } from '../config';
+import { AUTH_URL, API_URL } from "../config";
 
 //actions
 const createActionName = (actionName) => `app/users/${actionName}`;
@@ -12,31 +12,20 @@ export const logIn = (payload) => ({ type: LOG_IN, payload });
 export const logOut = () => ({ type: LOG_OUT });
 
 export const fetchUserData = () => {
-  return (dispatch) => {
-    const options = {
-      method: 'GET',
-      credentials: 'include'
-    };
-
-    fetch(`${API_URL}/auth/user`, options)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error("Server error");
-        }
-      })
-      .then((user) => {
-        // Update user data in local storage
-        localStorage.setItem('user', JSON.stringify(user));
-        dispatch(logIn({ user }));
-        console.log('user logged in:', user )
-      })
-      .catch((err) => {
-        console.error("Error fetching user data:", err);
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${API_URL}/user`, {
+        method: 'GET',
+        credentials: 'include',
       });
+      const user = await response.json();
+      dispatch(logIn(user));
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
+
 const userReducer = (statePart = null, action) => {
   switch (action.type) {
     case LOG_IN:

@@ -127,6 +127,21 @@ function getProducts() {
   ];
 }
 
+function getOrders() {
+  return [
+    {
+      id: 'order1',
+      user: { connect: { id: 'user1' } },
+      date: new Date(),
+      price: 74.99,
+      comment: 'Please, deliver faster!',
+      name: 'Kate Jo',
+      email: 'katejo@example.com',
+      address: '458 Str.Big, NY',
+    },
+  ];
+}
+
 async function seed() {
   await db.product.deleteMany();
 
@@ -135,8 +150,17 @@ async function seed() {
       return db.product.create({ data: product });
     }),
   );
-}
 
+  for (const order of getOrders()) {
+    // Uzupełnienie brakujących właściwości
+    const orderData = {
+      ...order,
+      paymentMethod: 'Credit Card', // Dodanie brakującej właściwości
+      totalPrice: order.price, // Przyjęcie ceny jako całkowitej ceny zamówienia
+    };
+    await db.order.create({ data: orderData });
+  }
+}
 seed()
   .catch((e) => {
     console.error(e);

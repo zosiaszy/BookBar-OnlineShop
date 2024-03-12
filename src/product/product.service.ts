@@ -1,21 +1,13 @@
-import {
-  Injectable,
-  NotFoundException,
-  ConflictException,
-} from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { Product } from '@prisma/client';
 
 @Injectable()
 export class ProductService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private prismaService: PrismaService) {}
 
   public getAllProducts(): Promise<Product[]> {
-    return this.prismaService.product.findMany({
-      include: {
-        gallery: true,
-      },
-    });
+    return this.prismaService.product.findMany();
   }
 
   public getProductById(id: string): Promise<Product | null> {
@@ -23,6 +15,16 @@ export class ProductService {
       where: { id },
       include: {
         gallery: true,
+      }
+    });
+  }
+
+  public async searchProducts(searchPhrase: string): Promise<Product[]> {
+    return this.prismaService.product.findMany({
+      where: {
+        title: {
+          contains: searchPhrase,
+        },
       },
     });
   }

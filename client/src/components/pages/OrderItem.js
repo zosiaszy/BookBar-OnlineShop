@@ -21,10 +21,10 @@ const OrderItem = ({ product }) => {
             alt={productData.title}
           ></img>
         )}
-        <p className="col-md-3">Price per item: ${product.price}</p>
-        <p className="col-md-2">Quantity: {count}</p>
-        <p className="col-md-3">Total for this item: ${product.price * count}</p>
-        {product.comment && <p >Comment: {product.comment}</p>}
+        <p className="mt-2">Price per item: ${product.price}</p>
+        <p>Quantity: {count}</p>
+        <p>Total for this item: ${product.price * count}</p>
+       
       </div>
     </div>
   );

@@ -27,7 +27,7 @@ model Product {
   author String
   rating Float
   price  Int
-  description String   @db.VarChar(1000)
+  description String   @db.VarChar(5000)
   image  String
   gallery ProductImage[]
 
@@ -40,20 +40,7 @@ model Product {
 }
 
 
-enum Role {
-  USER
-  ADMIN
-}
 
-model User {
-  id       String    @id @default(uuid())
-  email    String    @unique
-  role     Role      @default(USER)
-  password Password?
-  orders Order[]
-
-  
-}
 
 model Password {
   id             String @id @default(uuid())
@@ -76,7 +63,6 @@ model Order {
   totalPrice Int
 
   cartProducts CartProduct[]
-  
 }
 
 model CartProduct {
@@ -88,4 +74,18 @@ model CartProduct {
   comment   String?
   order     Order   @relation(fields: [orderId], references: [id])
   orderId   String
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id       String    @id @default(uuid())
+  email    String    @unique
+  role     Role      @default(USER)
+  password Password?
+
+  orders Order[]
 }
